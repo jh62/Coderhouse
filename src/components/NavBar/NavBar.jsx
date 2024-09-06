@@ -1,38 +1,35 @@
-import Cart from "../CartWidget/CartWidget";
+/* eslint-disable no-unused-vars */
+import { useState, useEffect } from "react";
+import { Nav, Navbar, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import CartWidget from "../CartWidget/CartWidget";
 
-const Navbar = () => {
+function NavBar() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch("https://66d63577f5859a704268a79b.mockapi.io/products")
+      .then((res) => res.json())
+      .then((res) => setCategories([...new Set(res.map((a) => a.category))]));
+  });
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          <img src="/src/assets/logo.jpeg" alt="Logo" width="30" height="30" />
-        </a>
-        <div className="collapse navbar-collapse justify-content-center">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Link 1
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Link 2
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Link 3
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="d-flex align-items-center">
-          <Cart></Cart>
-        </div>
-      </div>
-    </nav>
+    <Navbar bg="dark" data-bs-theme="dark">
+      <Container>
+        <Navbar.Brand as={Link} to="/">
+          Home
+        </Navbar.Brand>
+        <Nav className="me-auto">
+          {categories.map((cat) => (
+            <Nav.Link as={Link} to={`category/${cat}`} key={cat}>
+              {cat}
+            </Nav.Link>
+          ))}
+        </Nav>
+        <CartWidget></CartWidget>
+      </Container>
+    </Navbar>
   );
-};
+}
 
-export default Navbar;
+export default NavBar;
