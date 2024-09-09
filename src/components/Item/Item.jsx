@@ -16,7 +16,7 @@ function Item({ item }) {
             {item.category}
           </Badge>
           <Card.Text>{item.description}</Card.Text>
-          <Button variant="primary" as={Link} to={`product/${item.id}`}>
+          <Button variant="primary" as={Link} to={`/product/${item.id}`}>
             Ver producto
           </Button>
         </Card.Body>

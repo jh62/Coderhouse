@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CartWidget from "../CartWidget/CartWidget";
 
-function NavBar() {
+function NavBar({ cartCount }) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ function NavBar() {
             </Nav.Link>
           ))}
         </Nav>
-        <CartWidget></CartWidget>
+        <CartWidget cartCount={cartCount} />
       </Container>
     </Navbar>
   );

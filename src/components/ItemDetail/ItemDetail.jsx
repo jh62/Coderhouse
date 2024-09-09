@@ -1,25 +1,20 @@
 /* eslint-disable react/prop-types */
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
-import { Link } from "react-router-dom";
+import ItemCount from "../ItemCount/ItemCount";
+import { Stack } from "react-bootstrap";
 
-function ItemDetail({ detail }) {
+function ItemDetail({ detail, addToCart }) {
   return (
-    // <div className="item-detail">
-    //   <p>{detail?.name}</p>
-    //   <p>{detail?.price}</p>
-    //   <p>{detail?.description}</p>
-    // </div>
     <Col className="p-3">
       <Card>
         <Card.Img variant="top" src={detail?.image} />
         <Card.Body>
           <Card.Title>{detail?.name}</Card.Title>
           <Card.Text>{detail?.description}</Card.Text>
-          <Button variant="primary" as={Link} to={`product/${detail?.id}`}>
-            Ver producto
-          </Button>
+          <Stack direction="horizontal" gap={3} className="stack-horizontal">
+            <ItemCount addToCart={addToCart} />
+          </Stack>
         </Card.Body>
       </Card>
     </Col>
