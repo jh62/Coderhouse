@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import ItemList from "../ItemList/ItemList";
 import { useParams } from "react-router-dom";
+import { getProducts } from "../../firebase/db";
 
 function ItemListContainer() {
   const [items, setItems] = useState([]);
@@ -13,10 +14,7 @@ function ItemListContainer() {
   };
 
   useEffect(() => {
-    fetch("https://66d63577f5859a704268a79b.mockapi.io/products")
-      .then((res) => res.json())
-      .then((res) => setItems(res.filter((item) => (id ? item.category === id : item))));
-    console.log(id);
+    getProducts(setItems);
   }, [id]);
 
   return (

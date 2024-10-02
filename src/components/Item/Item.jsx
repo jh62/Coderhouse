@@ -12,7 +12,7 @@ function Item({ item }) {
         <Card.Img variant="top" src={item.image} />
         <Card.Body>
           <Card.Title>{item.name}</Card.Title>
-          <Badge as={Link} to={`category/${item.category}`} bg="secondary">
+          <Badge as={Link} to={`/category/${item.category}`} bg="secondary">
             {item.category}
           </Badge>
           <Card.Text>{item.description}</Card.Text>

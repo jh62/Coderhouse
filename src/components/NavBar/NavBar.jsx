@@ -4,15 +4,14 @@ import { useState, useEffect } from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CartWidget from "../CartWidget/CartWidget";
+import { getTags } from "../../firebase/db";
 
 function NavBar({ cartCount }) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("https://66d63577f5859a704268a79b.mockapi.io/products")
-      .then((res) => res.json())
-      .then((res) => setCategories([...new Set(res.map((a) => a.category))]));
-  });
+    getTags(setCategories);
+  }, []);
 
   return (
     <Navbar bg="dark" data-bs-theme="dark">
